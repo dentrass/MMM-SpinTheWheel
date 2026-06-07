@@ -1,0 +1,20 @@
+{
+  "name": "mmm-spinthewheel",
+  "version": "1.1.0",
+  "description": "Spin a random record from your Discogs vinyl collection.",
+  "author": "dentrass",
+  "license": "MIT",
+  "keywords": [
+    "magicmirror",
+    "discogs",
+    "vinyl",
+    "records",
+    "music",
+    "collection",
+    "mobile"
+  ],
+  "dependencies": {
+    "axios": "^1.6.0",
+    "express": "^4.18.2"
+  }
+}

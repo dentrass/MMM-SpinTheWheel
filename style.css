@@ -1,0 +1,100 @@
+.spinWrap{
+ text-align:center;
+}
+
+/* ===== VINYL DISC ===== */
+.vinyl{
+ width:520px;
+ height:520px;
+ border-radius:50%;
+ margin:0 auto;
+ position:relative;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+
+ /* basplast */
+ background:
+ radial-gradient(circle at 50% 52%, #111 0%, #000 60%, #000 100%),
+
+ /* grooves */
+ repeating-radial-gradient(
+  circle at center,
+  rgba(255,255,255,.04) 0px,
+  rgba(255,255,255,.04) 1px,
+  rgba(0,0,0,.25) 2px,
+  rgba(0,0,0,.25) 3px
+ );
+
+ box-shadow:
+ inset 0 0 120px rgba(255,255,255,.06),
+ inset 0 0 25px rgba(255,255,255,.15),
+ 0 30px 80px rgba(0,0,0,.9);
+
+ transition:transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ljusreflex */
+.vinyl::after{
+ content:"";
+ position:absolute;
+ inset:0;
+ border-radius:50%;
+ background:
+ linear-gradient(115deg,
+  rgba(255,255,255,.25) 0%,
+  rgba(255,255,255,.08) 18%,
+  transparent 40%
+ );
+ pointer-events:none;
+ mix-blend-mode:screen;
+}
+
+/* centrumhål */
+.vinyl::before{
+ content:"";
+ position:absolute;
+ width:18px;
+ height:18px;
+ background:#000;
+ border-radius:50%;
+ box-shadow:
+ 0 0 4px rgba(255,255,255,.25),
+ inset 0 0 4px rgba(255,255,255,.4);
+ z-index:3;
+}
+
+/* ===== LABEL ===== */
+.label{
+ width:240px;
+ height:240px;
+ border-radius:50%;
+ object-fit:cover;
+ z-index:2;
+
+ box-shadow:
+ 0 0 25px rgba(255,255,255,.25),
+ inset 0 0 20px rgba(0,0,0,.4);
+}
+
+/* ===== TEXT ===== */
+.title{
+ font-size:30px;
+ margin-top:20px;
+ font-weight:600;
+ color:#fff;
+ text-shadow:0 0 10px rgba(255,255,255,.4);
+}
+
+.artist{
+ font-size:24px;
+ margin-top:4px;
+ color:#ccc;
+}
+
+.count{
+ margin-top:14px;
+ font-size:18px;
+ color:#aaa;
+ letter-spacing:1px;
+}
