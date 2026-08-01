@@ -196,18 +196,40 @@ cover.onclick=()=>{
  viewerImg.src=cover.src
 }
 
-let startX=0
+let coverStartX=0
+let coverPointer=null
+let coverSwiped=false
 
-cover.addEventListener("touchstart",e=>{
- startX=e.touches[0].clientX
+cover.style.touchAction="pan-y"
+
+cover.addEventListener("pointerdown",e=>{
+ if(e.button!==undefined && e.button!==0)return
+ coverStartX=e.clientX
+ coverPointer=e.pointerId
+ coverSwiped=false
+ cover.setPointerCapture?.(e.pointerId)
 })
 
-cover.addEventListener("touchend",e=>{
- let diff=e.changedTouches[0].clientX-startX
+cover.addEventListener("pointerup",e=>{
+ if(e.pointerId!==coverPointer)return
+
+ let diff=e.clientX-coverStartX
+ coverPointer=null
+
  if(Math.abs(diff)<40)return
+
+ coverSwiped=true
  showingFront=!showingFront
  cover.src=showingFront ? frontSrc : backSrc
+ e.preventDefault()
 })
+
+cover.addEventListener("click",e=>{
+ if(!coverSwiped)return
+ coverSwiped=false
+ e.preventDefault()
+ e.stopImmediatePropagation()
+},true)
 
 let angle=0
 let velocity=0
@@ -215,36 +237,49 @@ let drag=false
 let lastX=0
 let lastT=0
 
-wheel.addEventListener("touchstart",e=>{
+let wheelPointer=null
+
+wheel.addEventListener("pointerdown",e=>{
+ if(e.button!==undefined && e.button!==0)return
+
  drag=true
- lastX=e.touches[0].clientX
- lastT=Date.now()
+ wheelPointer=e.pointerId
+ lastX=e.clientX
+ lastT=performance.now()
  velocity=0
+ wheel.setPointerCapture?.(e.pointerId)
+ e.preventDefault()
 })
 
-wheel.addEventListener("touchmove",e=>{
- if(!drag)return
+wheel.addEventListener("pointermove",e=>{
+ if(!drag || e.pointerId!==wheelPointer)return
 
- let x=e.touches[0].clientX
- let now=Date.now()
-
+ let x=e.clientX
+ let now=performance.now()
  let dx=x-lastX
- let dt=now-lastT
+ let dt=Math.max(now-lastT,1)
 
  velocity=dx/dt*25
  angle+=dx
-
  wheel.style.transform="rotate("+angle+"deg)"
 
  lastX=x
  lastT=now
+ e.preventDefault()
 })
 
-wheel.addEventListener("touchend",()=>{
+function releaseWheel(e){
+ if(!drag || e.pointerId!==wheelPointer)return
+
  drag=false
+ wheelPointer=null
  spin()
  fetch("/spin")
-})
+ e.preventDefault()
+}
+
+wheel.addEventListener("pointerup",releaseWheel)
+wheel.addEventListener("pointercancel",releaseWheel)
 
 function spin(){
  let f=.975

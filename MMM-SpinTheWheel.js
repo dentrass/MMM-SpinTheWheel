@@ -75,6 +75,57 @@ Module.register("MMM-SpinTheWheel", {
     }, 60);
   },
 
+  addVinylControls(vinyl) {
+    let dragging = false;
+    let pointerId = null;
+    let lastX = 0;
+
+    vinyl.style.touchAction = "none";
+
+    vinyl.addEventListener("pointerdown", (event) => {
+      if (event.button !== undefined && event.button !== 0)
+        return;
+
+      dragging = true;
+      pointerId = event.pointerId;
+      lastX = event.clientX;
+      vinyl.style.transition = "none";
+
+      if (vinyl.setPointerCapture)
+        vinyl.setPointerCapture(pointerId);
+
+      event.preventDefault();
+    });
+
+    vinyl.addEventListener("pointermove", (event) => {
+      if (!dragging || event.pointerId !== pointerId)
+        return;
+
+      this.angle += event.clientX - lastX;
+      lastX = event.clientX;
+      vinyl.style.transform = `rotate(${this.angle}deg)`;
+      event.preventDefault();
+    });
+
+    const finish = (event) => {
+      if (!dragging || event.pointerId !== pointerId)
+        return;
+
+      dragging = false;
+      vinyl.style.transition = "";
+
+      if (vinyl.hasPointerCapture?.(pointerId))
+        vinyl.releasePointerCapture(pointerId);
+
+      pointerId = null;
+      event.preventDefault();
+      this.spin();
+    };
+
+    vinyl.addEventListener("pointerup", finish);
+    vinyl.addEventListener("pointercancel", finish);
+  },
+
   getDom() {
 
     const wrap = document.createElement("div");
@@ -88,6 +139,7 @@ Module.register("MMM-SpinTheWheel", {
     const vinyl = document.createElement("div");
     vinyl.className = "vinyl";
     this.vinyl = vinyl;
+    this.addVinylControls(vinyl);
 
     const img = document.createElement("img");
     img.src = this.current.cover;
