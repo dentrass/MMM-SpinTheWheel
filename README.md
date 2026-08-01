@@ -16,6 +16,10 @@ MMM-SpinTheWheel loads your Discogs collection, randomly selects a record, displ
 
 ✅ Realistic spinning vinyl animation
 
+✅ Touchscreen control on the MagicMirror display
+
+✅ Mouse and VNC-compatible click-and-drag control
+
 ✅ Mobile-friendly remote control interface
 
 ✅ Track listing viewer
@@ -111,12 +115,24 @@ http://YOUR_MAGICMIRROR_IP:3001
 
 ### Mobile Features
 
-- Spin the wheel with touch gestures
+- Spin the wheel with touch, mouse or VNC click-and-drag gestures
 - View selected album artwork
 - Swipe between front and back cover
 - View complete track listing
 - Reset shuffle history
 - Real-time synchronization with MagicMirror
+
+---
+
+## Touch, Mouse and VNC Controls
+
+The vinyl record can be controlled directly from the MagicMirror display using a touchscreen, mouse, or a remote mouse connection through VNC.
+
+Press or click the vinyl, drag it horizontally, and release it to select and spin the next record.
+
+The mobile interface uses the same unified pointer controls, supporting both touch and mouse input. Album artwork can also be changed between the front and back cover by swiping or dragging it horizontally.
+
+No additional configuration is required.
 
 ---
 
