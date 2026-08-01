@@ -81,6 +81,18 @@ Restart MagicMirror.
 
 ---
 
+## Updating
+
+If MMM-SpinTheWheel was installed using Git, update it with:
+
+```bash
+cd ~/MagicMirror/modules/MMM-SpinTheWheel
+git pull
+npm install
+```
+
+---
+
 ## Configuration
 
 Add the module to your `config.js` file:
