@@ -1,9 +1,9 @@
-.spinWrap{
+.MMM-SpinTheWheel .spinWrap{
  text-align:center;
 }
 
 /* ===== VINYL DISC ===== */
-.vinyl{
+.MMM-SpinTheWheel .vinyl{
  width:520px;
  height:520px;
  border-radius:50%;
@@ -35,7 +35,7 @@
 }
 
 /* ljusreflex */
-.vinyl::after{
+.MMM-SpinTheWheel .vinyl::after{
  content:"";
  position:absolute;
  inset:0;
@@ -51,7 +51,7 @@
 }
 
 /* centrumhål */
-.vinyl::before{
+.MMM-SpinTheWheel .vinyl::before{
  content:"";
  position:absolute;
  width:18px;
@@ -65,7 +65,7 @@
 }
 
 /* ===== LABEL ===== */
-.label{
+.MMM-SpinTheWheel .label{
  width:240px;
  height:240px;
  border-radius:50%;
@@ -78,7 +78,7 @@
 }
 
 /* ===== TEXT ===== */
-.title{
+.MMM-SpinTheWheel .title{
  font-size:30px;
  margin-top:20px;
  font-weight:600;
@@ -86,13 +86,13 @@
  text-shadow:0 0 10px rgba(255,255,255,.4);
 }
 
-.artist{
+.MMM-SpinTheWheel .artist{
  font-size:24px;
  margin-top:4px;
  color:#ccc;
 }
 
-.count{
+.MMM-SpinTheWheel .count{
  margin-top:14px;
  font-size:18px;
  color:#aaa;
